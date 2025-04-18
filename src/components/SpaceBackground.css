@@ -1,0 +1,36 @@
+.space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #0f0f1a 0%, #1e1e3a 100%);
+  }
+  
+  .star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle infinite alternate;
+  }
+  
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+  
+  .shooting-star {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0), white);
+    animation: shoot 2s linear;
+    z-index: 2;
+  }
+  
+  @keyframes shoot {
+    0% { transform: translateX(0) translateY(0); opacity: 1; }
+    100% { transform: translateX(300px) translateY(150px); opacity: 0; }
+  }

@@ -1,0 +1,383 @@
+/* Base Styles */
+:root {
+    --primary: #6c5ce7;
+    --secondary: #00cec9;
+    --dark: #2d3436;
+    --light: #f5f6fa;
+    --correct: #00b894;
+    --incorrect: #d63031;
+    --space-dark: #0f0f1a;
+    --space-light: #1e1e3a;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background-color: var(--space-dark);
+    color: var(--light);
+    overflow-x: hidden;
+  }
+  
+  .app {
+    position: relative;
+    min-height: 100vh;
+  }
+  
+  .content {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* Space Background */
+  .space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle infinite alternate;
+  }
+  
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+  
+  .shooting-star {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0), white);
+    animation: shoot 2s linear;
+  }
+  
+  @keyframes shoot {
+    0% { transform: translateX(0) translateY(0); opacity: 1; }
+    100% { transform: translateX(300px) translateY(150px); opacity: 0; }
+  }
+  
+  /* Quiz Selector Styles */
+  .quiz-selector {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--secondary);
+  }
+  
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .quiz-card {
+    background: rgba(30, 30, 58, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .quiz-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, transparent 70%);
+    transition: all 0.5s ease;
+  }
+  
+  .quiz-card:hover::before {
+    transform: translate(25%, 25%);
+  }
+  
+  .planet-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+    color: white;
+  }
+  
+  .start-button {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 50px;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  /* Quiz Component Styles */
+  .quiz-container {
+    background: rgba(30, 30, 58, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid rgba(108, 92, 231, 0.3);
+  }
+  
+  .back-button {
+    background: none;
+    border: none;
+    color: var(--secondary);
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  .quiz-progress {
+    margin-bottom: 2rem;
+  }
+  
+  .progress-bar {
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .question-card {
+    margin-top: 1rem;
+  }
+  
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .option {
+    background: rgba(44, 44, 84, 0.7);
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(108, 92, 231, 0.2);
+  }
+  
+  .option:hover {
+    background: rgba(108, 92, 231, 0.2);
+  }
+  
+  .option.correct {
+    background: rgba(0, 184, 148, 0.3);
+    border-color: var(--correct);
+  }
+  
+  .option.incorrect {
+    background: rgba(214, 48, 49, 0.3);
+    border-color: var(--incorrect);
+  }
+  
+  .option.revealed {
+    background: rgba(0, 184, 148, 0.3);
+    border-color: var(--correct);
+  }
+  
+  .fact-box {
+    background: rgba(44, 44, 84, 0.7);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    border-left: 4px solid var(--secondary);
+  }
+  
+  .next-button {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .next-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .next-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+  }
+  
+  /* Results Component Styles */
+  .results-container {
+    text-align: center;
+    background: rgba(30, 30, 58, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid rgba(108, 92, 231, 0.3);
+  }
+  
+  .score-display {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 2rem auto;
+  }
+  
+  .score-circle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .circle-bg {
+    fill: none;
+    stroke: var(--space-light);
+    stroke-width: 10;
+  }
+  
+  .circle-bg {
+    fill: none;
+    stroke: url(#gradient);
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 440;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+  
+  .score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .score-text span {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .feedback {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: rgba(44, 44, 84, 0.7);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary);
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .restart-button, .share-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .restart-button {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+  }
+  
+  .share-button {
+    background: transparent;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+  }
+  
+  .restart-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+  }
+  
+  .share-button:hover {
+    background: rgba(0, 206, 201, 0.1);
+  }
+  
+  .constellation {
+    position: relative;
+    height: 100px;
+    margin-top: 2rem;
+  }
+  
+  .constellation::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+  }
+  
+  .constellation::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 80%;
+    background: linear-gradient(0deg, transparent, var(--secondary), transparent);
+  }
